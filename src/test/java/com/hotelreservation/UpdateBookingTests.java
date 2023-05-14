@@ -2,7 +2,6 @@ package com.hotelreservation;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -40,18 +39,5 @@ public class UpdateBookingTests extends BaseTest {
         Assertions.assertFalse(depositPaid);
     }
 
-    public String createToken() {
-        JSONObject body = new JSONObject();
-        body.put("username", "admin");
-        body.put("password", "password123");
-        Response response = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .body(body.toString())
-                .log().all()
-                .post(URL + "auth");
 
-        return response.jsonPath().getJsonObject("token").toString();
-
-    }
 }

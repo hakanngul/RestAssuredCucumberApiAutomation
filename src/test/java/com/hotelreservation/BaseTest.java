@@ -41,4 +41,19 @@ public class BaseTest {
         body.put("bookingdates", bookingDates);
         return body.toString();
     }
+
+    public String createToken() {
+        JSONObject body = new JSONObject();
+        body.put("username", "admin");
+        body.put("password", "password123");
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .body(body.toString())
+                .log().all()
+                .post(URL + "auth");
+
+        return response.jsonPath().getJsonObject("token").toString();
+
+    }
 }
